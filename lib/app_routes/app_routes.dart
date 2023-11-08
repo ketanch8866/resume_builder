@@ -8,6 +8,9 @@ import 'package:resume_builder/screens/home_screen.dart';
 import 'package:resume_builder/screens/splash_screen.dart';
 import 'package:resume_builder/screens/view_model.dart/home_view_model.dart';
 
+import '../screens/build_resume_screen.dart';
+import '../screens/view_model.dart/build_resume_controller.dart';
+
 abstract class AppRoutes {
   static getRoutes() => [
         GetPage(
@@ -34,5 +37,12 @@ abstract class AppRoutes {
             binding: BindingsBuilder(() {
               Get.lazyPut(() => HomeController());
             })),
+        GetPage(
+          name: AppRoutesName.buildResumeRoutes,
+          page: () => const BuildResumeScreen(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => BuildResumeController());
+          }),
+        ),
       ];
 }

@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.12.2
   google_fonts: ^6.1.0
   regexed_validator: ^2.0.0+1
+  
 
 dev_dependencies:
   flutter_test:

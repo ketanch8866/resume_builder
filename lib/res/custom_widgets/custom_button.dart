@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
             child: loading
                 ? SizedBox(
-                    height: 80,
+                    height: 20,
                     child: LottieBuilder.asset('asset/lottie/loading.json'))
                 : Text(
                     title,

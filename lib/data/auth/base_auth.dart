@@ -7,4 +7,5 @@ abstract class BaseAuthenticatiopn {
       String email, String password, String name);
   Future<UserModel?> loginToUserWithEmailAndPassword(
       String email, String password);
+  Future<void> signout();
 }

@@ -11,7 +11,10 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final FocusNode currentFocusNode;
   final FocusNode? nextFocusNode;
+  final Function(String)? onChange;
+  final Function()? onTap;
   final bool? info;
+  final bool? isreadOnly;
   const CustomTextField(
       {super.key,
       required this.controller,
@@ -20,8 +23,11 @@ class CustomTextField extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
       required this.currentFocusNode,
+      this.onChange,
+      this.onTap,
       this.nextFocusNode,
       this.info,
+      this.isreadOnly,
       required this.validator});
 
   @override
@@ -34,6 +40,9 @@ class CustomTextField extends StatelessWidget {
           Utils.fieldFocusNodeChange(context, currentFocusNode, nextFocusNode!);
         }
       },
+      readOnly: isreadOnly ?? false,
+      onTap: onTap,
+      onChanged: onChange,
       validator: validator,
       decoration: InputDecoration(
         prefixIcon: Icon(
