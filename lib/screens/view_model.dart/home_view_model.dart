@@ -12,6 +12,8 @@ import 'package:resume_builder/res/app_const.dart';
 class HomeController extends GetxController {
   Rx<Status> _status = Status.loading.obs;
   Rx<Status> get status => _status;
+  Rx<Status> _statusbtn = Status.complited.obs;
+  Rx<Status> get statusbtn => _statusbtn;
   RxInt _selectedIndex = 0.obs;
   RxInt get selectedIndex => _selectedIndex;
   Rx<TextEditingController> resumeNameController = TextEditingController().obs;
@@ -24,6 +26,9 @@ class HomeController extends GetxController {
 
   setStatus(Status sta) {
     _status.value = sta;
+  }
+  setbtnStatus(Status sta) {
+    _statusbtn.value = sta;
   }
 
   RxList<Resume> allResume = <Resume>[].obs;
@@ -57,12 +62,15 @@ class HomeController extends GetxController {
     resumid = allResume[index].id;
     Get.offNamed(AppRoutesName.buildResumeRoutes);
   }
+
   viewResume(int index) {
     resumid = allResume[index].id;
-    Get.offNamed(AppRoutesName.viewResumeRoutes);
+    Get.toNamed(AppRoutesName.viewResumeRoutes);
   }
 
   buildResume() async {
+    setbtnStatus(Status.loading);
+    update();
     resumid = DateTime.now().toIso8601String();
     await _database.createCollection(resumid, getUid(), "AllResume", {
       "uid": getUid(),
@@ -117,6 +125,9 @@ class HomeController extends GetxController {
         }
       ]
     });
+    getAllResumeData();
+    setbtnStatus(Status.complited);
+    update();
     Get.offNamed(AppRoutesName.buildResumeRoutes);
   }
 

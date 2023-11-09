@@ -61,60 +61,67 @@ class HomeScreen extends StatelessWidget {
                                   );
                                 },
                               ),
-                              CustomButton(
-                                  title: "Build Resume",
-                                  onPressed: () {
-                                    Get.dialog(Dialog(
-                                      child: Card(
-                                        child: Form(
-                                          key: _formKey,
-                                          child: Column(
-                                            children: [
-                                              Text("Resume Name:"),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: CustomTextField(
-                                                  controller: controller
-                                                      .resumeNameController
-                                                      .value,
-                                                  prefixIcon: Icons.abc,
-                                                  errorText: "",
-                                                  hintText: "Enter resume name",
-                                                  textInputType:
-                                                      TextInputType.name,
-                                                  currentFocusNode: FocusNode(),
-                                                  validator: (p0) {
-                                                    if (p0!.isEmpty) {
-                                                      return "This field is required";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
+                              GetBuilder<HomeController>(
+                                builder: (controller) => CustomButton(
+                                    loading: controller.statusbtn.value ==
+                                        Status.loading,
+                                    title: "Build Resume",
+                                    onPressed: () {
+                                      Get.dialog(Dialog(
+                                        child: Card(
+                                          child: Form(
+                                            key: _formKey,
+                                            child: Column(
+                                              children: [
+                                                Text("Resume Name:"),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: CustomTextField(
+                                                    controller: controller
+                                                        .resumeNameController
+                                                        .value,
+                                                    prefixIcon: Icons.abc,
+                                                    errorText: "",
+                                                    hintText:
+                                                        "Enter resume name",
+                                                    textInputType:
+                                                        TextInputType.name,
+                                                    currentFocusNode:
+                                                        FocusNode(),
+                                                    validator: (p0) {
+                                                      if (p0!.isEmpty) {
+                                                        return "This field is required";
+                                                      } else {
+                                                        return null;
+                                                      }
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
-                                              CustomButton(
-                                                  width: 100,
-                                                  title: "Ok",
-                                                  buttonColors: const [
-                                                    AppColors.secondaryColor,
-                                                    AppColors.primaryColor,
-                                                  ],
-                                                  onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      Get.back(
-                                                          result: true,
-                                                          canPop: true);
-                                                      controller.buildResume();
-                                                    }
-                                                  }),
-                                            ],
+                                                CustomButton(
+                                                    width: 100,
+                                                    title: "Ok",
+                                                    buttonColors: const [
+                                                      AppColors.secondaryColor,
+                                                      AppColors.primaryColor,
+                                                    ],
+                                                    onPressed: () {
+                                                      if (_formKey.currentState!
+                                                          .validate()) {
+                                                        Get.back(
+                                                            result: true,
+                                                            canPop: true);
+                                                        controller
+                                                            .buildResume();
+                                                      }
+                                                    }),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ));
-                                  }),
+                                      ));
+                                    }),
+                              ),
                               // CustomButton(
                               //     title: "View Resume",
                               //     onPressed: () {
@@ -123,37 +130,6 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
               ),
-            )) // GetX<HomeController>(
-        //   builder: (controller) {
-        //     // return controller.status.value == Status.loading
-        //     //     ? const Center(child: CircularProgressIndicator())
-        //     //     : controller.status.value == Status.error
-        //     //         ? Center(
-        //     //             child: Text(
-        //     //               "Somethig went wrong",
-        //     //               style: AppTextStyle.titleBlack,
-        //     //             ),
-        //     //           )
-        //     //         : Padding(
-        //     //             padding: EdgeInsets.symmetric(horizontal: 8.0),
-        //     //             child: Column(
-        //     //               crossAxisAlignment: CrossAxisAlignment.start,
-        //     //               children: [
-        //     //                 Text(
-        //     //                   "Home",
-        //     //                   style: AppTextStyle.titleBlack,
-        //     //                 ),
-        //     //               ],
-        //     //             ),
-        //     //           );
-        //
-        //     return Center(
-        //       child: CustomButton(title: "Build Resume", onPressed: () {
-        //         Get.offNamed(AppRoutesName.buildResumeRoutes);
-        //       }),
-        //     );
-        //   },
-        // )
-        );
+            )));
   }
 }

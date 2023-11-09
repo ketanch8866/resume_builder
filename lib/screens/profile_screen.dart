@@ -148,6 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: resumeBuildController.profileData.length,
               itemBuilder: (context, index) {
@@ -173,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: AppTextStyle.largeTitleBlack
                 .copyWith(color: AppColors.primaryColor),
           ),
-          Divider(
+          const Divider(
             color: AppColors.primaryColor,
           ),
           Container(
@@ -192,6 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: AppColors.secondaryColor),
                         title: Text(
                           resumeBuildController.profileData[index].mobile,
+                          maxLines: 1,overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.normalTitleText
                               .copyWith(color: AppColors.blackColor),
                         ),
@@ -205,6 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         title: Text(
                           resumeBuildController.profileData[index].email,
+                          maxLines: 1,overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.normalTitleText
                               .copyWith(color: AppColors.blackColor),
                         ),
@@ -223,6 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         title: Text(
                           resumeBuildController.profileData[index].linkedInUrl,
+                          maxLines: 1,overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.normalTitleText
                               .copyWith(color: AppColors.secondaryColor),
                         ),
@@ -236,6 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         title: Text(
                           resumeBuildController.profileData[index].city,
+                          maxLines: 1,overflow: TextOverflow.ellipsis,
                           style: AppTextStyle.normalTitleText
                               .copyWith(color: AppColors.blackColor),
                         ),

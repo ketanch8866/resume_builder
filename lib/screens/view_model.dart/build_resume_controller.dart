@@ -89,7 +89,7 @@ class BuildResumeController extends GetxController {
     super.onInit();
   }
 
-  loadAllData() async {
+  Future<void> loadAllData() async {
     try {
       setStatus(Status.loading);
       await _database
@@ -111,6 +111,7 @@ class BuildResumeController extends GetxController {
         if (value.exists) {
           careerObjective = CareerData.fromJson(value.data()!);
           careerObjectiveController.value.text = careerObjective!.description;
+          log("jwerewopp ==== ${careerObjective!.description}");
         }
       });
       await _database.getDocData(resumid, getUid(), "Skills").then((value) {

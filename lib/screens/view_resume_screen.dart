@@ -21,7 +21,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
   @override
   void initState() {
     final resumeBuildController = Get.find<BuildResumeController>();
-    items = loaditeam(resumeBuildController);
+
+    loaditeam(resumeBuildController);
     super.initState();
   }
 
@@ -64,6 +65,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
                                   color: AppColors.secondaryColor),
                               title: Text(
                                 resumeBuildController.profileData[0].mobile,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.normalTitleText
                                     .copyWith(color: AppColors.blackColor),
                               ),
@@ -77,6 +80,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
                               ),
                               title: Text(
                                 resumeBuildController.profileData[0].email,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.normalTitleText
                                     .copyWith(color: AppColors.blackColor),
                               ),
@@ -96,6 +101,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
                               title: Text(
                                 resumeBuildController
                                     .profileData[0].linkedInUrl,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.normalTitleText
                                     .copyWith(color: AppColors.secondaryColor),
                               ),
@@ -109,6 +116,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
                               ),
                               title: Text(
                                 resumeBuildController.profileData[0].city,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.normalTitleText
                                     .copyWith(color: AppColors.blackColor),
                               ),
@@ -164,6 +173,8 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
             children: [
               Text(
                 "Career Objective  ",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: AppTextStyle.titleBlack
                     .copyWith(color: AppColors.primaryColor),
               ),
@@ -178,7 +189,7 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            resumeBuildController.careerObjectiveController.value.text,
+            resumeBuildController.careerObjective!.description,
             maxLines: 5,
             style: AppTextStyle.smallBlackText,
           ),
@@ -213,8 +224,9 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    direction: Axis.horizontal,
                     children: [
                       RichText(
                         text: TextSpan(
@@ -272,8 +284,9 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    direction: Axis.horizontal,
                     children: [
                       Text(
                         resumeBuildController
@@ -380,12 +393,14 @@ class _ViewResumeScreenState extends State<ViewResumeScreen> {
     );
   }
 
-  List<Widget> loaditeam(BuildResumeController resumeBuildController) {
-    return [
-      careerObjective(resumeBuildController),
-      buildSkillWidget(resumeBuildController, 0),
-      buildExprienceWidget(resumeBuildController),
-      buildEducationWidget(resumeBuildController),
-    ];
+  Future<void> loaditeam(BuildResumeController resumeBuildController) async {
+    await resumeBuildController.loadAllData().then((value) {
+      items = [
+        careerObjective(resumeBuildController),
+        buildSkillWidget(resumeBuildController, 0),
+        buildExprienceWidget(resumeBuildController),
+        buildEducationWidget(resumeBuildController),
+      ];
+    });
   }
 }
