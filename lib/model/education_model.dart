@@ -6,15 +6,44 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 
-EducationData educationDataFromJson(String str) =>
-    EducationData.fromJson(json.decode(str));
+// EducationData educationDataFromJson(String str) =>
+//     EducationData.fromJson(json.decode(str));
 
-String educationDataToJson(EducationData data) => json.encode(data.toJson());
+// String educationDataToJson(EducationData data) => json.encode(data.toJson());
+Education educationFromJson(String str) => Education.fromJson(json.decode(str));
+
+String educationToJson(Education data) => json.encode(data.toJson());
+
+class Education {
+  String id;
+  String uid;
+  List<EducationData> data;
+
+  Education({
+    required this.id,
+    required this.uid,
+    required this.data,
+  });
+
+  factory Education.fromJson(Map<String, dynamic> json) => Education(
+        id: json["id"],
+        uid: json["uid"],
+        data: List<EducationData>.from(
+            json["data"].map((x) => EducationData.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "uid": uid,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+}
 
 class EducationData {
   String univercityName;
   TextEditingController univercityController;
-  String uid;
+  // String uid;
+  // String id;
   String degree;
   TextEditingController degreeController;
   DateTime startTime;
@@ -24,7 +53,8 @@ class EducationData {
 
   EducationData({
     required this.univercityName,
-    required this.uid,
+    // required this.uid,
+    // required this.id,
     required this.degree,
     required this.startTime,
     required this.endTime,
@@ -36,7 +66,8 @@ class EducationData {
 
   factory EducationData.fromJson(Map<String, dynamic> json) => EducationData(
         univercityName: json["univercity_name"],
-        uid: json["uid"],
+        // id: json["id"],
+        // uid: json["uid"],
         degree: json["degree"],
         startTime: DateTime.parse(json["start_time"]),
         endTime: DateTime.parse(json["end_time"]),
@@ -49,7 +80,8 @@ class EducationData {
 
   Map<String, dynamic> toJson() => {
         "univercity_name": univercityName,
-        "uid": uid,
+        // "uid": uid,
+        // "id": id,
         "degree": degree,
         "start_time": startTime.toIso8601String(),
         "end_time": endTime.toIso8601String(),

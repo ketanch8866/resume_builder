@@ -162,7 +162,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget showProfileData(
       BuildResumeController resumeBuildController, int index) {
-    return Padding(
+    return 
+    Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,

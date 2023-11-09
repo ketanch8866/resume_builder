@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:resume_builder/app_routes/app_routes_name.dart';
+import 'package:resume_builder/res/app_const.dart';
 import 'package:resume_builder/screens/view_model.dart/build_resume_controller.dart';
 
 class BuildResumeScreen extends StatefulWidget {
@@ -34,10 +37,24 @@ class _BuildResumeScreenState extends State<BuildResumeScreen> {
         appBar: AppBar(),
         drawer: Drawer(
           child: Column(
-            children: drawerWidget(controller),
+            children: [
+              ListTile(
+                onTap: () {
+                  Get.offNamed(AppRoutesName.homeRoutes);
+                  _scaffoldKey.currentState!.closeDrawer();
+                },
+                title: const Text("Home"),
+                leading: const Icon(Icons.home),
+              ),
+              ...drawerWidget(controller)
+            ],
           ),
         ),
-        body: Obx(() => getBody(controller)));
+        body: Obx(() => controller.status.value == Status.loading
+            ? Center(child: LottieBuilder.asset('asset/lottie/loading.json'))
+            : controller.status.value == Status.error
+                ? const Center(child: Text("Something Went Wrong"))
+                : getBody(controller)));
   }
 
   Widget getBody(BuildResumeController controller) {

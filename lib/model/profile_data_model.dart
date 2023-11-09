@@ -9,11 +9,13 @@ ProfileData profileDataFromJson(String str) => ProfileData.fromJson(json.decode(
 String profileDataToJson(ProfileData data) => json.encode(data.toJson());
 
 class ProfileData {
-  final String name;
-  final String email;
-  final String mobile;
-  final String linkedInUrl;
-  final String city;
+   String name;
+   String email;
+   String mobile;
+   String linkedInUrl;
+   String city;
+   String id;
+   String uid;
 
   ProfileData({
     required this.name,
@@ -21,6 +23,8 @@ class ProfileData {
     required this.mobile,
     required this.linkedInUrl,
     required this.city,
+    required this.id,
+    required this.uid,
   });
 
   factory ProfileData.fromJson(Map<String, dynamic> json) => ProfileData(
@@ -29,6 +33,8 @@ class ProfileData {
     mobile: json["mobile"],
     linkedInUrl: json["linkedIn_url"],
     city: json["city"],
+    id: json["id"],
+    uid: json["uid"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -37,5 +43,7 @@ class ProfileData {
     "mobile": mobile,
     "linkedIn_url": linkedInUrl,
     "city": city,
+    "uid":uid,
+    "id":id
   };
 }

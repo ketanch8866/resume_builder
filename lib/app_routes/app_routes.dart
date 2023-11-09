@@ -7,6 +7,8 @@ import 'package:resume_builder/screens/auth/signup_screen.dart';
 import 'package:resume_builder/screens/home_screen.dart';
 import 'package:resume_builder/screens/splash_screen.dart';
 import 'package:resume_builder/screens/view_model.dart/home_view_model.dart';
+import 'package:resume_builder/screens/view_model.dart/view_resume_controller.dart';
+import 'package:resume_builder/screens/view_resume_screen.dart';
 
 import '../screens/build_resume_screen.dart';
 import '../screens/view_model.dart/build_resume_controller.dart';
@@ -33,13 +35,20 @@ abstract class AppRoutes {
             })),
         GetPage(
             name: AppRoutesName.homeRoutes,
-            page: () => const HomeScreen(),
+            page: () => HomeScreen(),
             binding: BindingsBuilder(() {
               Get.lazyPut(() => HomeController());
             })),
         GetPage(
           name: AppRoutesName.buildResumeRoutes,
           page: () => const BuildResumeScreen(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => BuildResumeController());
+          }),
+        ),
+        GetPage(
+          name: AppRoutesName.viewResumeRoutes,
+          page: () => const ViewResumeScreen(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => BuildResumeController());
           }),

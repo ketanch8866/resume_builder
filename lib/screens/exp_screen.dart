@@ -216,12 +216,14 @@ class ExperienceScreen extends StatelessWidget {
                                   width: Get.width * 0.3,
                                   title: "Edit And Save",
                                   onPressed: () {
-                                    resumeBuildController.updateExprience(
-                                        index,
-                                        DateTime.parse(resumeBuildController
-                                            .startDateController.value.text),
-                                        DateTime.parse(resumeBuildController
-                                            .endDateController.value.text));
+                                    if (_formKey.currentState!.validate()) {
+                                      resumeBuildController.updateExprience(
+                                          index,
+                                          DateTime.parse(resumeBuildController
+                                              .startDateController.value.text),
+                                          DateTime.parse(resumeBuildController
+                                              .endDateController.value.text));
+                                    }
                                   }),
                               CustomButton(
                                   width: Get.width * 0.3,

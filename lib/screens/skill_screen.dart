@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resume_builder/res/app_text_style/app_text_style.dart';
+import 'package:resume_builder/res/custom_widgets/custom_button.dart';
 import 'package:resume_builder/res/custom_widgets/custom_textfield.dart';
 import 'package:resume_builder/res/theam/app_colors.dart';
 import 'package:resume_builder/screens/view_model.dart/build_resume_controller.dart';
@@ -66,6 +67,15 @@ class SkillScreen extends StatelessWidget {
               GetBuilder<BuildResumeController>(
                 builder: (controller) =>
                     Expanded(child: buildSkillWidget(controller, 0)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomButton(
+                  title: "Save Data",
+                  onPressed: () {
+                    resumeBuildController.saveSkill();
+                  },
+                ),
               )
             ],
           ),

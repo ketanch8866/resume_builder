@@ -128,17 +128,17 @@ class EducationScreen extends StatelessWidget {
 
                                       if (pickedDate != null) {
                                         String formattedDate =
-                                            DateFormat('yyyy')
+                                            DateFormat('yyyy-MM-dd')
                                                 .format(pickedDate);
 
                                         resumeBuildController
-                                            .startDateController
+                                            .startDateEduController
                                             .value
                                             .text = formattedDate;
                                       }
                                     },
                                     controller: resumeBuildController
-                                        .startDateController.value,
+                                        .startDateEduController.value,
                                     prefixIcon: Icons.date_range,
                                     errorText: "",
                                     hintText: "Select start Date ",
@@ -161,13 +161,13 @@ class EducationScreen extends StatelessWidget {
                                               context: context,
                                               initialDate: DateTime.now(),
                                               firstDate: resumeBuildController
-                                                      .startDateController
+                                                      .startDateEduController
                                                       .value
                                                       .text
                                                       .isNotEmpty
                                                   ? DateTime.parse(
                                                       resumeBuildController
-                                                          .startDateController
+                                                          .startDateEduController
                                                           .value
                                                           .text)
                                                   : DateTime(1997),
@@ -175,10 +175,12 @@ class EducationScreen extends StatelessWidget {
 
                                       if (pickedDate != null) {
                                         String formattedDate =
-                                            DateFormat('yyyy')
+                                            DateFormat('yyyy-MM-dd')
                                                 .format(pickedDate);
                                         if (DateTime.parse(resumeBuildController
-                                                .startDateController.value.text)
+                                                .startDateEduController
+                                                .value
+                                                .text)
                                             .isAfter(DateTime.parse(
                                                 formattedDate))) {
                                           Utils.showScanckBar(
@@ -186,14 +188,14 @@ class EducationScreen extends StatelessWidget {
                                               toastType: ToastType.waring);
                                         } else {
                                           resumeBuildController
-                                              .endDateController
+                                              .endDateEduController
                                               .value
                                               .text = formattedDate;
                                         }
                                       }
                                     },
                                     controller: resumeBuildController
-                                        .endDateController.value,
+                                        .endDateEduController.value,
                                     prefixIcon: Icons.date_range,
                                     errorText: "",
                                     hintText: "Select End Date",
@@ -218,12 +220,18 @@ class EducationScreen extends StatelessWidget {
                                   width: Get.width * 0.3,
                                   title: "Edit And Save",
                                   onPressed: () {
-                                    resumeBuildController.updateEducation(
-                                        index,
-                                        DateTime.parse(resumeBuildController
-                                            .startDateController.value.text),
-                                        DateTime.parse(resumeBuildController
-                                            .endDateController.value.text));
+                                    if (_formKey.currentState!.validate()) {
+                                      resumeBuildController.updateEducation(
+                                          index,
+                                          DateTime.parse(resumeBuildController
+                                              .startDateEduController
+                                              .value
+                                              .text),
+                                          DateTime.parse(resumeBuildController
+                                              .endDateEduController
+                                              .value
+                                              .text));
+                                    }
                                   }),
                               CustomButton(
                                   width: Get.width * 0.3,
